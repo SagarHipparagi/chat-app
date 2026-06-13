@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: chat-app
+    env: node
+    buildCommand: "cd client && npm install && npm run build && cd ../server && npm install"
+    startCommand: "cd server && node app.js"
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false

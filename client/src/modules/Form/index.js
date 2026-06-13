@@ -18,23 +18,29 @@ const Form = ({
     const handleSubmit = async(e) => {
         console.log('data :>> ', data);
         e.preventDefault()
-        const res = await fetch(`http://localhost:8000/api/${isSignInPage ? 'login' : 'register'}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
+        try {
+            const res = await fetch(`/api/${isSignInPage ? 'login' : 'register'}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
 
-        if(res.status === 400) {
-            alert('Invalid credentials')
-        }else{
-            const resData = await res.json()
-            if(resData.token) {
-                localStorage.setItem('user:token', resData.token)
-                localStorage.setItem('user:detail', JSON.stringify(resData.user))
-                navigate('/')
+            if(res.status === 400) {
+                const errorMsg = await res.text()
+                alert(errorMsg || 'Invalid credentials')
+            } else {
+                const resData = await res.json()
+                if(resData.token) {
+                    localStorage.setItem('user:token', resData.token)
+                    localStorage.setItem('user:detail', JSON.stringify(resData.user))
+                    navigate('/')
+                }
             }
+        } catch(err) {
+            alert('Could not connect to server. Please try again.')
+            console.error(err)
         }
     }
   return (

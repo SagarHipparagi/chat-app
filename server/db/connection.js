@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
+const dns = require('dns');
 
-const url = "mongodb+srv://chatapphackthon:DJkumar143@cluster0.95tmhya.mongodb.net/chatapp?retryWrites=true&w=majority";
+// Use Google DNS to resolve MongoDB Atlas SRV records
+dns.setServers(['8.8.8.8', '8.8.4.4']);
+
+const url = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.t3nzhko.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 mongoose.connect(url, {
     useNewUrlParser: true,
