@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: chat-app
+    name: connecthub
     env: node
     buildCommand: "cd client && npm install && npm run build && cd ../server && npm install"
     startCommand: "cd server && node app.js"

@@ -1,4 +1,4 @@
-# Real-Time Chat Application
+# ConnectHub - Real-Time Chat Application
 
 A full-stack, real-time messaging application built with the MERN stack (MongoDB, Express, React, Node.js) and Socket.io. The application supports instant peer-to-peer messaging, live presence detection, and message delivery status indicators.
 
